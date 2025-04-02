@@ -1,6 +1,7 @@
 # Specific ignores
 
 Downloaded/
+.vscode/*
 
 # C++ gitignore
 
