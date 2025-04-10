@@ -1,22 +1,26 @@
-#include "Matrix.hpp"
 #include <Arduino.h>
-#include <cstdio>
+#include "Adafruit_PCF8574.h"
+#include "OwnPCF.h"
+#include "Switches.h"
 
-/* MATRIX SETUP */
-int nbCols = 6;
-int colPins[] = {12, 14, 27, 26, 25, 33};
-int nbRows = 3;
-int rowPins[] = {16, 17, 18};
-Matrix matrix(colPins, rowPins, nbCols, nbRows);
+#define NB_PCFS 1
+
+int addresses[] = {0x00};
+
+Adafruit_PCF8574 ada_pcf;
+OwnPCF opcf(&ada_pcf);
+Switches swb0(opcf, 0);
+Switches swb1(opcf, 1);
+Switches swb2(opcf, 2);
+
 
 void setup() {
   Serial.begin(115200);
-  matrix.setup();
+  for (int i = 0; i < NB_PCFS; i++)
+    opcf.startPCF(addresses[i]);
 }
 
 void loop() {
-  matrix.updateMatrix();
-  if (Serial.read() == '!') {
-    matrix.printAll();
-  }
+  opcf.update();
+  delay(100);
 }
