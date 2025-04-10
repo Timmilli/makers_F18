@@ -1,6 +1,7 @@
 -Isrc/
 -Ilib/
 -Ilib/Matrix/
--Ilib/OwnPCF/
+-Ilib/OnePCF/
+-Ilib/AllPCF/
 -Ilib/Switch/
 -Ilib/Potentiometer/

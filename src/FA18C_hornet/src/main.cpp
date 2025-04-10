@@ -1,26 +1,18 @@
-#include <Arduino.h>
 #include "Adafruit_PCF8574.h"
-#include "OwnPCF.h"
-#include "Switches.h"
+#include "AllPCF.hpp"
+#include "OnePCF.hpp"
+#include "Switch.hpp"
+#include <Arduino.h>
+#define DCSBIOS_DEFAULT_SERIAL
+#define DCSBIOS_DISABLE_SERVO
+#include "DcsBios.h"
 
-#define NB_PCFS 1
+#define NB_PCFS 3
 
-int addresses[] = {0x00};
+int addresses[] = {0x20, 0x21, 0x22};
 
 Adafruit_PCF8574 ada_pcf;
-OwnPCF opcf(&ada_pcf);
-Switches swb0(opcf, 0);
-Switches swb1(opcf, 1);
-Switches swb2(opcf, 2);
 
+void setup() { Serial.begin(115200); }
 
-void setup() {
-  Serial.begin(115200);
-  for (int i = 0; i < NB_PCFS; i++)
-    opcf.startPCF(addresses[i]);
-}
-
-void loop() {
-  opcf.update();
-  delay(100);
-}
+void loop() {}
