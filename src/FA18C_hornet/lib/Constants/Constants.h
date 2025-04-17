@@ -1,0 +1,9 @@
+#ifndef __CONSTANTS_H__
+#define __CONSTANTS_H__
+
+#define MAX_CONTROLLER_NUMBER 10
+
+#define NB_SWITCH_CONTROLLER 3
+#define NB_POTENTIOMETER_CONTROLLER 2
+
+#endif // __CONSTANTS_H__

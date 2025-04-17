@@ -1,6 +1,7 @@
 #include "Switch.hpp"
-#include "OnePCF.hpp"
+#include "SwitchController.hpp"
 
-Switch::Switch(OnePCF &pcf, unsigned int pin) : _pcf(pcf), _pin(pin) {}
+Switch::Switch(SwitchController &pcf, unsigned int pin)
+    : _pcf(pcf), _pin(pin) {}
 
 unsigned int Switch::readState() { return _pcf.getState(_pin); }

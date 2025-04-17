@@ -1,7 +1,7 @@
 -Isrc/
 -Ilib/
--Ilib/Matrix/
--Ilib/OnePCF/
--Ilib/AllPCF/
--Ilib/Switch/
--Ilib/Potentiometer/
+-Ilib/ArduinoLibs/
+-Ilib/ArduinoLibs/Adafruit_BusIO/
+-Ilib/ArduinoLibs/Adafruit_PCF8574/
+-Ilib/ArduinoLibs/DCS-BIOS/
+-Ilib/ArduinoLibs/Servo/

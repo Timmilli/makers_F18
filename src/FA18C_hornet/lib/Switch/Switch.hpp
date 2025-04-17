@@ -1,17 +1,17 @@
-#ifndef __SWITCH_H__
-#define __SWITCH_H__
+#ifndef __SWITCH_HPP__
+#define __SWITCH_HPP__
 
-#include "OnePCF.hpp"
+#include "SwitchController.hpp"
 #include <Arduino.h>
 
 class Switch {
 private:
-  OnePCF &_pcf;
+  SwitchController &_pcf;
   unsigned int _pin;
 
 public:
-  Switch(OnePCF &pcf, unsigned int pin);
+  Switch(SwitchController &pcf, unsigned int pin);
   unsigned int readState();
 };
 
-#endif // __SWITCH_H__
+#endif // __SWITCH_HPP__
