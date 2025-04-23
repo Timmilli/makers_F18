@@ -125,7 +125,7 @@ void resetAllStates() { PollingInput::resetAllStates(); }
 #include "internal/RotarySyncingPotentiometer.h"
 #include "internal/Switches.h"
 #include "internal/SyncingSwitches.h"
-#ifndef DCSBIOS_DISABLE_SERVO
+#ifdef DCSBIOS_ENABLE_SERVO
 #include "internal/Servos.h"
 #endif
 #include "internal/AnalogMultiPos.h"

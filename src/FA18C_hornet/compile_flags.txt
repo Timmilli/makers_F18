@@ -1,7 +1,10 @@
 -Isrc/
 -Ilib/
--Ilib/ArduinoLibs/
--Ilib/ArduinoLibs/Adafruit_BusIO/
--Ilib/ArduinoLibs/Adafruit_PCF8574/
--Ilib/ArduinoLibs/DCS-BIOS/
--Ilib/ArduinoLibs/Servo/
+-Ilib/Adafruit_BusIO/
+-Ilib/Adafruit_PCF8574/
+-Ilib/Constants/
+-Ilib/DCS-BIOS/src/
+-Ilib/DCS-BIOS/src/internal/
+-Ilib/OwnAdafruit_PCF8574/
+-Ilib/OwnSwitch/
+-Ilib/Servo/
