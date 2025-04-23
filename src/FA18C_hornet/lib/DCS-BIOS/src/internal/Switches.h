@@ -184,13 +184,6 @@ private:
   unsigned long debounceDelay_;
   unsigned long lastDebounceTime = 0;
 
-  char readState() {
-    if (digitalRead(pinA_) == LOW)
-      return 0;
-    if (digitalRead(pinB_) == LOW)
-      return 2;
-    return 1;
-  }
   void resetState() { lastState_ = (lastState_ == 0) ? -1 : 0; }
   void pollInput() {
     char state = readState();
@@ -228,6 +221,14 @@ public:
     lastState_ = readState();
     debounceSteadyState_ = lastState_;
     debounceDelay_ = debounceDelay;
+  }
+
+  virtual char readState() {
+    if (digitalRead(pinA_) == LOW)
+      return 0;
+    if (digitalRead(pinB_) == LOW)
+      return 2;
+    return 1;
   }
 
   void SetControl(const char *msg) { msg_ = msg; }
