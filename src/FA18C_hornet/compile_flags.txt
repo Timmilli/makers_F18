@@ -5,6 +5,6 @@
 -Ilib/Constants/
 -Ilib/DCS-BIOS/src/
 -Ilib/DCS-BIOS/src/internal/
--Ilib/OwnAdafruit_PCF8574/
+-Ilib/OwnPCF/
 -Ilib/OwnSwitch/
 -Ilib/Servo/
