@@ -33,11 +33,16 @@ void setup() {
 
   /* Switches setup */
 
+  // TODO Add all switch definitions and add them to respective arrays
+
   OwnSwitch3Pos ufcMasterCaution(OwnPCFs[0], 1, 2, "ufcMasterCaution", "msg",
                                  50);
   /* Potentiometer setup */
 
+  // TODO Add all potentiometer definitions
+
   /*DcsBios setup function*/
+  // Unused as it only repeats 'Serial.begin'
   // DcsBios::setup();
 }
 
@@ -53,6 +58,7 @@ void loop() {
     for (int i = 0; i < NB_SWITCHES; i++) {
       Serial.print("Switch ");
       Serial.print(switches2Pos[i]->getName());
+      // TODO finish correct printing
     }
   }
 }
