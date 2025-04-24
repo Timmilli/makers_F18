@@ -9,7 +9,6 @@ template <unsigned long pollIntervalMs = POLL_EVERY_TIME>
 class Switch2PosT : PollingInput, public ResettableInput {
 private:
   const char *msg_;
-  char pin_;
   char debounceSteadyState_;
   char lastState_;
   bool reverse_;
@@ -19,7 +18,7 @@ private:
   void resetState() { lastState_ = (lastState_ == 0) ? -1 : 0; }
 
   void pollInput() {
-    char state = digitalRead(pin_);
+    char state = readState();
     if (reverse_)
       state = !state;
 
@@ -40,21 +39,32 @@ private:
   }
 
 public:
-  Switch2PosT(const char *msg, char pin, bool reverse = false,
+  Switch2PosT() : PollingInput(pollIntervalMs) {}
+  Switch2PosT(const char *msg, bool reverse = false,
               unsigned long debounceDelay = 50)
       : PollingInput(pollIntervalMs) {
     msg_ = msg;
-    pin_ = pin;
-    pinMode(pin_, INPUT_PULLUP);
     debounceDelay_ = debounceDelay;
     reverse_ = reverse;
 
-    lastState_ = digitalRead(pin_);
+    if (reverse_)
+      lastState_ = !lastState_;
+  }
+
+  void setAttributes(const char *msg, char lastState, bool reverse,
+                     unsigned long debounceDelay) {
+    msg_ = msg;
+    debounceDelay_ = debounceDelay;
+    reverse_ = reverse;
+
+    lastState_ = lastState;
     if (reverse_)
       lastState_ = !lastState_;
   }
 
   void SetControl(const char *msg) { msg_ = msg; }
+
+  virtual char readState();
 
   void resetThisState() { this->resetState(); }
 };
@@ -177,8 +187,6 @@ template <unsigned long pollIntervalMs = POLL_EVERY_TIME>
 class Switch3PosT : PollingInput, public ResettableInput {
 private:
   const char *msg_;
-  char pinA_;
-  char pinB_;
   char lastState_;
   char debounceSteadyState_;
   unsigned long debounceDelay_;
@@ -210,25 +218,23 @@ private:
   }
 
 public:
-  Switch3PosT(const char *msg, char pinA, char pinB,
-              unsigned long debounceDelay = 50)
+  Switch3PosT() : PollingInput(pollIntervalMs) {}
+  Switch3PosT(const char *msg, unsigned long debounceDelay = 50)
       : PollingInput(pollIntervalMs) {
     msg_ = msg;
-    pinA_ = pinA;
-    pinB_ = pinB;
-    pinMode(pinA_, INPUT_PULLUP);
-    pinMode(pinB_, INPUT_PULLUP);
     lastState_ = readState();
     debounceSteadyState_ = lastState_;
     debounceDelay_ = debounceDelay;
   }
 
-  virtual char readState() {
-    if (digitalRead(pinA_) == LOW)
-      return 0;
-    if (digitalRead(pinB_) == LOW)
-      return 2;
-    return 1;
+  virtual char readState();
+
+  void setAttributes(const char *msg, char lastState,
+                     unsigned long debounceDelay = 50) {
+    msg_ = msg;
+    lastState_ = lastState;
+    debounceSteadyState_ = lastState_;
+    debounceDelay_ = debounceDelay;
   }
 
   void SetControl(const char *msg) { msg_ = msg; }
@@ -291,6 +297,7 @@ public:
   void resetThisState() { this->resetState(); }
 };
 typedef SwitchMultiPosT<> SwitchMultiPos;
+
 } // namespace DcsBios
 
 #endif
