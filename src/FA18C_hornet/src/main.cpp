@@ -58,7 +58,8 @@ void loop() {
     for (int i = 0; i < NB_SWITCHES; i++) {
       Serial.print("Switch ");
       Serial.print(switches2Pos[i]->getName());
-      // TODO finish correct printing
+      Serial.print(switches2Pos[i]->readState());
+      Serial.println();
     }
   }
 }

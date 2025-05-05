@@ -41,80 +41,12 @@ Normally, those #defines would go in a separate "config.h" or you would use
 compiler flags. But since Arduino libraries do not come with their own build
 system, we are just putting everything into the header file.
 */
-#ifdef DCSBIOS_RS485_MASTER
-#include "internal/DcsBiosNgRS485Master.cpp.inc"
-#include "internal/DcsBiosNgRS485Master.h"
-#endif
-#ifdef DCSBIOS_RS485_SLAVE
-#include "internal/DcsBiosNgRS485Slave.cpp.inc"
-#include "internal/DcsBiosNgRS485Slave.h"
-#endif
-#ifdef DCSBIOS_IRQ_SERIAL
-
-namespace DcsBios {
-ProtocolParser parser;
-
-ISR(USART0_RX_vect) {
-  volatile uint8_t c = UDR0;
-  parser.processCharISR(c);
-}
-
-void setup() {
-  PRR0 &= ~(1 << PRUSART0);
-  UBRR0H = 0;
-  UBRR0L = 3; // 250000 bps
-  UCSR0A = 0;
-  UCSR0C = (1 << UCSZ00) | (1 << UCSZ01);
-
-  UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0);
-}
-
-void loop() {
-  PollingInput::pollInputs();
-  ExportStreamListener::loopAll();
-}
-
-void resetAllStates() { PollingInput::resetAllStates(); }
-
-static void usart_tx(const char *str) {
-  const char *c = str;
-  while (*c) {
-    while (!(UCSR0A & (1 << UDRE0)))
-      ;          // wait until TX buffer is empty
-    UDR0 = *c++; // write byte to TX buffer
-  }
-}
-
-bool tryToSendDcsBiosMessage(const char *msg, const char *arg) {
-  DcsBios::usart_tx(msg);
-  DcsBios::usart_tx(" ");
-  DcsBios::usart_tx(arg);
-  DcsBios::usart_tx("\n");
-  DcsBios::PollingInput::setMessageSentOrQueued();
-  return true;
-}
-} // namespace DcsBios
-#endif
 #ifdef DCSBIOS_DEFAULT_SERIAL
 namespace DcsBios {
-ProtocolParser parser;
-void setup() { Serial.begin(250000); }
-void loop() {
-  while (Serial.available()) {
-    parser.processChar(Serial.read());
-  }
-  PollingInput::pollInputs();
-  ExportStreamListener::loopAll();
-}
-bool tryToSendDcsBiosMessage(const char *msg, const char *arg) {
-  Serial.write(msg);
-  Serial.write(' ');
-  Serial.write(arg);
-  Serial.write('\n');
-  DcsBios::PollingInput::setMessageSentOrQueued();
-  return true;
-}
-void resetAllStates() { PollingInput::resetAllStates(); }
+void setup();
+void loop();
+bool tryToSendDcsBiosMessage(const char *msg, const char *arg);
+void resetAllStates();
 } // namespace DcsBios
 #endif
 
@@ -163,13 +95,13 @@ inline bool sendDcsBiosMessage(const char *msg, const char *arg) {
 }
 } // namespace DcsBios
 
-// for backwards compatibility, can be removed when we have a proper place to
-// document this interface:
-inline bool sendDcsBiosMessage(const char *msg, const char *arg) {
-  while (!DcsBios::tryToSendDcsBiosMessage(msg, arg))
-    ;
-  return true;
-}
+// // for backwards compatibility, can be removed when we have a proper place to
+// // document this interface:
+// inline bool sendDcsBiosMessage(const char *msg, const char *arg) {
+//   while (!DcsBios::tryToSendDcsBiosMessage(msg, arg))
+//     ;
+//   return true;
+// }
 #endif
 
 #endif // include guard
