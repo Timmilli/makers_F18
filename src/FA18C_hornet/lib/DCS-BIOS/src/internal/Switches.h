@@ -40,6 +40,7 @@ private:
 
 public:
   Switch2PosT() : PollingInput(pollIntervalMs) {}
+
   Switch2PosT(const char *msg, bool reverse = false,
               unsigned long debounceDelay = 50)
       : PollingInput(pollIntervalMs) {
