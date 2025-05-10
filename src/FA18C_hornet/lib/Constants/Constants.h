@@ -50,6 +50,7 @@
 /* Multiplex and Potentiometer macros */
 
 #define MULTIPLEX_AMOUNT 1
+#define NB_POTENTIOMETER 7
 
 // First multiplexer
 #define FST_ADDR_ENABLE 1

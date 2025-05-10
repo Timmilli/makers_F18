@@ -32,7 +32,7 @@ char findHighPin() {
 OwnSwitch2Pos::OwnSwitch2Pos(OwnPCF *pcf, unsigned int pin, const char *name,
                              const char *msg, bool reverse,
                              unsigned long debounceDelay)
-    : _oPCF(pcf), _pin(pin) {
+    : _oPCF(pcf), _pin(pin), _lastState(0) {
   strncpy(_name, name, MAX_NAME_LENGTH);
   _oPCF->activatePin(_pin);
   char lastState = digitalRead(FST_SIMPLE_READ_PIN);
@@ -40,7 +40,8 @@ OwnSwitch2Pos::OwnSwitch2Pos(OwnPCF *pcf, unsigned int pin, const char *name,
   setAttributes(msg, lastState, reverse, debounceDelay);
 }
 
-char OwnSwitch2Pos::readState() {
+char OwnSwitch2Pos::readState() { return _lastState; }
+char OwnSwitch2Pos::update() {
   _oPCF->activatePin(_pin);
   char state = digitalRead(FST_SIMPLE_READ_PIN);
   _oPCF->deactivatePin(_pin);
@@ -50,7 +51,7 @@ char *OwnSwitch2Pos::getName() { return _name; }
 
 OwnSwitch3Pos::OwnSwitch3Pos(OwnPCF *pcf, unsigned int pin, const char *name,
                              const char *msg, unsigned long debounceDelay)
-    : _oPCF(pcf), _pin(pin) {
+    : _oPCF(pcf), _pin(pin), _lastState(0) {
   strncpy(_name, name, MAX_NAME_LENGTH);
   _oPCF->activatePin(_pin);
   char lastState = switchCase(digitalRead(FST_SIMPLE_READ_PIN),
@@ -60,7 +61,8 @@ OwnSwitch3Pos::OwnSwitch3Pos(OwnPCF *pcf, unsigned int pin, const char *name,
   setAttributes(msg, lastState, debounceDelay);
 }
 
-char OwnSwitch3Pos::readState() {
+char OwnSwitch3Pos::readState() { return _lastState; }
+char OwnSwitch3Pos::update() {
   _oPCF->activatePin(_pin);
   char state = switchCase(digitalRead(FST_SIMPLE_READ_PIN),
                           digitalRead(SCND_SIMPLE_READ_PIN));
@@ -72,10 +74,13 @@ char *OwnSwitch3Pos::getName() { return _name; }
 OwnSwitchMultiPos::OwnSwitchMultiPos(OwnPCF *oPCF, unsigned int pin,
                                      const char *msg, const char *name,
                                      bool reverse)
-    : _oPCF(oPCF), _pin(pin) {
+    : _oPCF(oPCF), _pin(pin), _lastState(0) {
   setAttributes(msg, reverse);
 }
-char OwnSwitchMultiPos::readState() {
+
+char OwnSwitchMultiPos::readState() { return _lastState; }
+
+char OwnSwitchMultiPos::update() {
   _oPCF->activatePin(_pin);
   char pin = findHighPin();
   _oPCF->deactivatePin(_pin);
