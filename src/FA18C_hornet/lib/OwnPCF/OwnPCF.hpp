@@ -6,13 +6,12 @@
 class OwnPCF {
 private:
   Adafruit_PCF8574 *_pcf;
-  unsigned int _states[8];
 
 public:
   OwnPCF(Adafruit_PCF8574 *pcf);
   void startPCF(int addr);
-  void update();
-  unsigned int getState(unsigned int index);
+  void activatePin(unsigned int index);
+  void deactivatePin(unsigned int index);
 };
 
 #endif // include guard

@@ -1,7 +1,7 @@
 #include "OwnPotentiometer.hpp"
 
 OwnPotentiometer::OwnPotentiometer(OwnMultiplex *oMul, const char *msg,
-                                   char pin, char *name, bool reverse,
+                                   char pin, const char *name, bool reverse,
                                    unsigned int input_min,
                                    unsigned int input_max)
     : _oMul(oMul), _pin(pin) {

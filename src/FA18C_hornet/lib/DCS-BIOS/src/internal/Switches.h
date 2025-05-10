@@ -252,20 +252,6 @@ private:
   char numberOfPins_;
   char lastState_;
   bool reverse_;
-  char readState() {
-    unsigned char ncPinIdx = lastState_;
-    for (unsigned char i = 0; i < numberOfPins_; i++) {
-      if (pins_[i] == PIN_NC)
-        ncPinIdx = i;
-      else {
-        if (digitalRead(pins_[i]) == LOW && reverse_ == false)
-          return i;
-        else if (digitalRead(pins_[i]) == HIGH && reverse_ == true)
-          return i;
-      }
-    }
-    return ncPinIdx;
-  }
   void resetState() { lastState_ = (lastState_ == 0) ? -1 : 0; }
   void pollInput() {
     char state = readState();
@@ -278,6 +264,7 @@ private:
   }
 
 public:
+  SwitchMultiPosT() : PollingInput(pollIntervalMs), lastState_(0) {}
   SwitchMultiPosT(const char *msg, const byte *pins, char numberOfPins,
                   bool reverse = false)
       : PollingInput(pollIntervalMs), lastState_(0) {
@@ -291,6 +278,13 @@ public:
         pinMode(pins[i], INPUT_PULLUP);
     }
     lastState_ = readState();
+  }
+
+  virtual char readState();
+
+  void setAttributes(const char *msg, bool reverse) {
+    msg_ = msg;
+    reverse_ = reverse;
   }
 
   void SetControl(const char *msg) { msg_ = msg; }

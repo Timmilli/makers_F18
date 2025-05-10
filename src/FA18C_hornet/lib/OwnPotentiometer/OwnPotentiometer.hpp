@@ -14,9 +14,9 @@ private:
   char _name[MAX_NAME_LENGTH];
 
 public:
-  OwnPotentiometer(OwnMultiplex *oMul, const char *msg, char pin, char *name,
-                   bool reverse = false, unsigned int input_min = 0,
-                   unsigned int input_max = 1023);
+  OwnPotentiometer(OwnMultiplex *oMul, const char *msg, char pin,
+                   const char *name, bool reverse, unsigned int input_min,
+                   unsigned int input_max);
   unsigned int readState();
   char *getName();
 };

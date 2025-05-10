@@ -2,20 +2,18 @@
 #define __OWNMULTIPLEX_HPP__
 
 #include "Arduino.h"
+#include "OwnPCF.hpp"
 
 class OwnMultiplex {
 private:
-  byte _pin_A;
-  byte _pin_B;
-  byte _pin_C;
+  OwnPCF *_oPCF;
   byte _pin_enable;
   byte _pin_read;
-  int _states[8];
+  float _states[8];
 
 public:
-  OwnMultiplex(byte addr_A, byte addr_B, byte addr_C, byte pin_enable,
-               byte pin_read);
-  void startMultiplex();
+  OwnMultiplex(OwnPCF *oPCF, byte pin_enable, byte pin_read);
+  void startMultiplex(); // TODO check cuz not sure if this is to be kept
   void update();
   int getState(unsigned int index);
 };
