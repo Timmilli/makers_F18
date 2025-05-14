@@ -26,8 +26,6 @@ OwnPotentiometer *potentiometers[NB_POTENTIOMETER];
 
 /* Switch and potentiometer definitions */
 
-// TODO Verify all attribution with hardware
-
 // ELEC
 OwnSwitch2Pos lGenSw(OwnPCFs[0], FIFTH_PIN, "L_GEN_SW", "msg", false, 50);
 OwnSwitch3Pos batterySw(OwnPCFs[0], FIRST_PIN, "BATTERY_SW", "msg", 50);
