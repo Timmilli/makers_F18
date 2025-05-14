@@ -1,10 +1,11 @@
-# FA18C_hornet
 
 This is the directory for the Platformio project.
 
 It contains everything to make the software work.
 
-## Organisation
+All libraries are already preinstalled, so it should work like that.
+
+It is organized as it follows:
 
 FA18C\_hornet
 |--lib
@@ -48,7 +49,3 @@ FA18C\_hornet
    |- main.c
 |- platformio.ini
 |- README --> THIS FILE
-
-## Usage
-
-As everything is already preinstalled, only the main needs to be compiled and transfered on the ESP32.
