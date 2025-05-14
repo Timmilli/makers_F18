@@ -2,8 +2,6 @@
 
 This project is made by two engineering students looking to make the cockpit of a FA18-C Hornet that would be usable for the game DCS.
 
-More info here (it is in French): https://www.eirlab.net/2025/02/27/panneau-de-controle-cockpit-davion/ 
-
 # Tools
 
 Already existing tools will be used for this project.
@@ -27,3 +25,7 @@ For the communication between the simulation and the computer, ![DCS-Bios](https
 # Goals
 
 We aim to make the cockpit but by using switches designed by us and by using the less electronic cards possible.
+
+# Contributing
+
+As it is a school project, we don't aim to have help in this project. However, if you want to persue this project, feel free to contact me. I'll be glad to tell you more.
