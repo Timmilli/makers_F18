@@ -23,62 +23,59 @@ OwnMultiplex *OwnMultiplexes[MULTIPLEX_AMOUNT];
 
 void *switches[NB_2SWITCHES + NB_3SWITCHES + NB_NSWITCHES];
 OwnPotentiometer *potentiometers[NB_POTENTIOMETER];
+
 /* Switch and potentiometer definitions */
 
 // TODO Verify all attribution with hardware
 
 // ELEC
-OwnSwitch2Pos lGenSw(OwnPCFs[0], FIRST_PIN, "L_GEN_SW", "msg", false, 50);
-OwnSwitch3Pos batterySw(OwnPCFs[2], FIRST_PIN, "BATTERY_SW", "msg", 50);
-OwnSwitch2Pos rGenSw(OwnPCFs[0], SECOND_PIN, "R_GEN_SW", "msg", false, 50);
+OwnSwitch2Pos lGenSw(OwnPCFs[0], FIFTH_PIN, "L_GEN_SW", "msg", false, 50);
+OwnSwitch3Pos batterySw(OwnPCFs[0], FIRST_PIN, "BATTERY_SW", "msg", 50);
+OwnSwitch2Pos rGenSw(OwnPCFs[0], SIXTH_PIN, "R_GEN_SW", "msg", false, 50);
 
 // ECS
-OwnSwitch3Pos ecsModeSw(OwnPCFs[2], SECOND_PIN, "ECS_MODE_SW", "msg", 50);
-OwnPotentiometer cabinTemp(OwnMultiplexes[0], "msg", FIRST_PIN, "CABIN_TEMP",
-                           false, 0, 1023);
-OwnPotentiometer suitTemp(OwnMultiplexes[0], "msg", SECOND_PIN, "SUIT_TEMP",
-                          false, 0, 1023);
-OwnSwitch3Pos cabinPressSw(OwnPCFs[2], THIRD_PIN, "CABIN_PRESS_SW", "msg", 50);
-OwnSwitch2Pos pitotHeatSw(OwnPCFs[0], THIRD_PIN, "PITOT_HEAT_SW", "msg", false,
-                          50);
-OwnSwitch3Pos engAntiiceSw(OwnPCFs[2], FOURTH_PIN, "ENG_ANTIICE_SW", "msg", 50);
-OwnSwitchMultiPos bleedAirKnob(OwnPCFs[3], FIRST_PIN, "msg", "BLEED_AIR_KNOB",
+OwnSwitch3Pos ecsModeSw(OwnPCFs[0], SECOND_PIN, "ECS_MODE_SW", "msg", 50);
+OwnPotentiometer cabinTemp(OwnMultiplexes[0], "msg", FIRST_MLTPLX_PIN,
+                           "CABIN_TEMP", false, 0, 1023);
+OwnPotentiometer suitTemp(OwnMultiplexes[0], "msg", SECOND_MLTPLX_PIN,
+                          "SUIT_TEMP", false, 0, 1023);
+OwnSwitch3Pos cabinPressSw(OwnPCFs[0], THIRD_PIN, "CABIN_PRESS_SW", "msg", 50);
+OwnSwitch2Pos pitotHeatSw(OwnPCFs[0], SEVENTH_PIN, "PITOT_HEAT_SW", "msg",
+                          false, 50);
+OwnSwitch3Pos engAntiiceSw(OwnPCFs[0], FOURTH_PIN, "ENG_ANTIICE_SW", "msg", 50);
+OwnSwitchMultiPos bleedAirKnob(OwnPCFs[1], THIRD_PIN, "msg", "BLEED_AIR_KNOB",
                                false);
 
 // INTR LT
-OwnPotentiometer consolesDimmer(OwnMultiplexes[0], "msg", FOURTH_PIN,
+OwnPotentiometer consolesDimmer(OwnMultiplexes[0], "msg", THIRD_MLTPLX_PIN,
                                 "CONSOLES_DIMMER", false, 0, 1023);
-OwnPotentiometer instPnlDimmer(OwnMultiplexes[0], "msg", SIXTH_PIN,
+OwnPotentiometer instPnlDimmer(OwnMultiplexes[0], "msg", FOURTH_MLTPLX_PIN,
                                "INST_PNL_DIMMER", false, 0, 1023);
-OwnPotentiometer floodDimmer(OwnMultiplexes[0], "msg", FIFTH_PIN,
+OwnPotentiometer floodDimmer(OwnMultiplexes[0], "msg", FIFTH_MLTPLX_PIN,
                              "FLOOD_DIMMER", false, 0, 1023);
-OwnSwitch2Pos lightsTestSw(OwnPCFs[0], FOURTH_PIN, "LIGHTS_TEST_SW", "msg",
+OwnSwitch2Pos lightsTestSw(OwnPCFs[0], EIGHTH_PIN, "LIGHTS_TEST_SW", "msg",
                            false, 50);
-OwnPotentiometer warnCautionDimmer(OwnMultiplexes[0], "msg", SEVENTH_PIN,
+OwnPotentiometer warnCautionDimmer(OwnMultiplexes[0], "msg", SIXTH_MLTPLX_PIN,
                                    "WARN_CAUTION_DIMMER", false, 0, 1023);
-OwnPotentiometer chartDimmer(OwnMultiplexes[0], "msg", THIRD_PIN,
+OwnPotentiometer chartDimmer(OwnMultiplexes[0], "msg", SEVENTH_MLTPLX_PIN,
                              "CHART_DIMMER", false, 0, 1023);
-OwnSwitch3Pos cockkpitLightModeSw(OwnPCFs[2], FIFTH_PIN,
+OwnSwitch3Pos cockkpitLightModeSw(OwnPCFs[1], FIRST_PIN,
                                   "COCKKPIT_LIGHT_MODE_SW", "msg", 50);
 
 // SNSR
-OwnSwitch3Pos flirSw(OwnPCFs[2], SEVENTH_PIN, "FLIR_SW", "msg", 50);
-OwnSwitch2Pos ltdRSw(OwnPCFs[0], FIFTH_PIN, "LTD_R_SW", "msg", false, 50);
-OwnSwitch2Pos lstNflrSw(OwnPCFs[0], SIXTH_PIN, "LST_NFLR_SW", "msg", false, 50);
-OwnSwitchMultiPos radarSw(OwnPCFs[3], THIRD_PIN, "msg", "RADAR_SW",
-                          ky58PowerSelect false);
-OwnSwitchMultiPos insSw(OwnPCFs[3], SECOND_PIN, "msg", "INS_SW", false);
+OwnSwitch3Pos flirSw(OwnPCFs[2], FOURTH_PIN, "FLIR_SW", "msg", 50);
+OwnSwitch2Pos ltdRSw(OwnPCFs[1], SECOND_PIN, "LTD_R_SW", "msg", false, 50);
+OwnSwitch2Pos lstNflrSw(OwnPCFs[2], FIFTH_PIN, "LST_NFLR_SW", "msg", false, 50);
+OwnSwitchMultiPos radarSw(OwnPCFs[1], FOURTH_PIN, "msg", "RADAR_SW", false);
+OwnSwitchMultiPos insSw(OwnPCFs[1], FIFTH_PIN, "msg", "INS_SW", false);
 
 // KY 58
-OwnSwitchMultiPos ky58ModeSelect(OwnPCFs[3], FIFTH_PIN, "msg",
+OwnSwitchMultiPos ky58ModeSelect(OwnPCFs[1], SIXTH_PIN, "msg",
                                  "KY58_MODE_SELECT", false);
-OwnSwitchMultiPos ky58FillSelect(OwnPCFs[3], FOURTH_PIN, "msg",
+OwnSwitchMultiPos ky58FillSelect(OwnPCFs[1], SEVENTH_PIN, "msg",
                                  "KY58_FILL_SELECT", false);
-OwnSwitchMultiPos ky58PowerSelect(OwnPCFs[2], EIGHTH_PIN, "KY58_POWER_SELECT",
+OwnSwitchMultiPos ky58PowerSelect(OwnPCFs[1], EIGHTH_PIN, "KY58_POWER_SELECT",
                                   "msg", 50);
-
-// TODO is this one used?
-// OwnPotentiometer ky58Volume("KY58_VOLUME", PIN);
 
 /* Main code */
 
@@ -129,7 +126,7 @@ void setup() {
   potentiometers[i++] = &warnCautionDimmer;
 
   OwnMultiplexes[0] = new OwnMultiplex(
-      OwnPCFs[3], FIRST_POTENTIOMETER_PIN, SECOND_POTENTIOMETER_PIN,
+      OwnPCFs[2], FIRST_POTENTIOMETER_PIN, SECOND_POTENTIOMETER_PIN,
       THIRD_POTENTIOMETER_PIN, FST_ADDR_ENABLE, ANALOG_READ_ADDR);
 
   /*DcsBios setup function*/
