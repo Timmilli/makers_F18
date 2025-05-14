@@ -19,4 +19,7 @@ This one is used only for the .json of the planes that are then moved to :
 
 This one is the arduino library of DcsBios. 
 
-This should then be unzip into the directory containing your other arduino librairies.
+A modified version of this library is located in:
+```
+/src/FA18\_hornet/lib/DCS-BIOS/
+```
