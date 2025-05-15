@@ -41,11 +41,10 @@ OwnSwitch2Pos::OwnSwitch2Pos(OwnPCF *pcf, unsigned int pin, const char *name,
 }
 
 char OwnSwitch2Pos::readState() { return _lastState; }
-char OwnSwitch2Pos::update() {
+void OwnSwitch2Pos::update() {
   _oPCF->activatePin(_pin);
-  char state = digitalRead(FST_SIMPLE_READ_PIN);
+  _lastState = digitalRead(FST_SIMPLE_READ_PIN);
   _oPCF->deactivatePin(_pin);
-  return state;
 }
 char *OwnSwitch2Pos::getName() { return _name; }
 
@@ -62,12 +61,11 @@ OwnSwitch3Pos::OwnSwitch3Pos(OwnPCF *pcf, unsigned int pin, const char *name,
 }
 
 char OwnSwitch3Pos::readState() { return _lastState; }
-char OwnSwitch3Pos::update() {
+void OwnSwitch3Pos::update() {
   _oPCF->activatePin(_pin);
-  char state = switchCase(digitalRead(FST_SIMPLE_READ_PIN),
+  _lastState = switchCase(digitalRead(FST_SIMPLE_READ_PIN),
                           digitalRead(SCND_SIMPLE_READ_PIN));
   _oPCF->deactivatePin(_pin);
-  return state;
 }
 char *OwnSwitch3Pos::getName() { return _name; }
 
@@ -80,10 +78,9 @@ OwnSwitchMultiPos::OwnSwitchMultiPos(OwnPCF *oPCF, unsigned int pin,
 
 char OwnSwitchMultiPos::readState() { return _lastState; }
 
-char OwnSwitchMultiPos::update() {
+void OwnSwitchMultiPos::update() {
   _oPCF->activatePin(_pin);
-  char pin = findHighPin();
+  _lastState = findHighPin();
   _oPCF->deactivatePin(_pin);
-  return pin;
 }
 char *OwnSwitchMultiPos::getName() { return _name; }

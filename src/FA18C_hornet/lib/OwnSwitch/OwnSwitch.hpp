@@ -19,7 +19,7 @@ public:
                 const char *msg, bool reverse, unsigned long debounceDelay);
   char readState();
   char *getName();
-  char update();
+  void update();
 };
 
 class OwnSwitch3Pos : public DcsBios::Switch3Pos {
@@ -34,7 +34,7 @@ public:
                 const char *msg, unsigned long debounceDelay);
   char readState();
   char *getName();
-  char update();
+  void update();
 };
 
 class OwnSwitchMultiPos : public DcsBios::SwitchMultiPos {
@@ -49,7 +49,7 @@ public:
                     const char *name, bool reverse);
   char readState();
   char *getName();
-  char update();
+  void update();
 };
 
 #endif // include guard

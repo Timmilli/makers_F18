@@ -11,8 +11,8 @@ private:
 
 public:
   OwnPCF(PCF8574 *pcf, const char *name);
-  char *getName();
   void startPCF();
+  char *getName();
   void activatePin(unsigned int index);
   void deactivatePin(unsigned int index);
 };
