@@ -86,9 +86,9 @@ void setup() {
   Serial.begin(115200);
 
   /* PCF setup */
-  OwnPCFs[0] = new OwnPCF(&firstPCF);
-  OwnPCFs[1] = new OwnPCF(&secondPCF);
-  OwnPCFs[2] = new OwnPCF(&thirdPCF);
+  OwnPCFs[0] = new OwnPCF(&firstPCF, "first PCF");
+  OwnPCFs[1] = new OwnPCF(&secondPCF, "second PCF");
+  OwnPCFs[2] = new OwnPCF(&thirdPCF, "third PCF");
   for (int i = 0; i < PCF_AMOUNT; i++) {
     OwnPCFs[i]->startPCF();
   }
