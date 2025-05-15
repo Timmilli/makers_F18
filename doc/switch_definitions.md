@@ -34,13 +34,11 @@ OwnSwitch3Pos ecsModeSw(OwnPCFs[0], SECOND_PIN, "ECS_MODE_SW", "msg", 50);
 `
 
 `
-OwnPotentiometer cabinTemp(OwnMultiplexes[0], "msg", FIRST_MLTPLX_PIN,
-                           "CABIN_TEMP", false, 0, 1023);
+OwnPotentiometer cabinTemp(OwnMultiplexes[0], "msg", FIRST_MLTPLX_PIN, "CABIN_TEMP", false, 0, 1023);
 `
 
 `
-OwnPotentiometer suitTemp(OwnMultiplexes[0], "msg", SECOND_MLTPLX_PIN,
-                          "SUIT_TEMP", false, 0, 1023);
+OwnPotentiometer suitTemp(OwnMultiplexes[0], "msg", SECOND_MLTPLX_PIN, "SUIT_TEMP", false, 0, 1023);
 `
 
 `
@@ -48,8 +46,7 @@ OwnSwitch3Pos cabinPressSw(OwnPCFs[0], THIRD_PIN, "CABIN_PRESS_SW", "msg", 50);
 `
 
 `
-OwnSwitch2Pos pitotHeatSw(OwnPCFs[0], SEVENTH_PIN, "PITOT_HEAT_SW", "msg",
-                          false, 50);
+OwnSwitch2Pos pitotHeatSw(OwnPCFs[0], SEVENTH_PIN, "PITOT_HEAT_SW", "msg", false, 50);
 `
 
 `
@@ -57,55 +54,45 @@ OwnSwitch3Pos engAntiiceSw(OwnPCFs[0], FOURTH_PIN, "ENG_ANTIICE_SW", "msg", 50);
 `
 
 `
-OwnSwitchMultiPos bleedAirKnob(OwnPCFs[1], THIRD_PIN, "msg", "BLEED_AIR_KNOB",
-                               false);
+OwnSwitchMultiPos bleedAirKnob(OwnPCFs[1], THIRD_PIN, "msg", "BLEED_AIR_KNOB", false);
 `
 
 ### INTR LT Panel
 `
-OwnPotentiometer consolesDimmer(OwnMultiplexes[0], "msg", THIRD_MLTPLX_PIN,
-                                "CONSOLES_DIMMER", false, 0, 1023);
+OwnPotentiometer consolesDimmer(OwnMultiplexes[0], "msg", THIRD_MLTPLX_PIN, "CONSOLES_DIMMER", false, 0, 1023);
 `
 
 `
-OwnPotentiometer instPnlDimmer(OwnMultiplexes[0], "msg", FOURTH_MLTPLX_PIN,
-                               "INST_PNL_DIMMER", false, 0, 1023);
+OwnPotentiometer instPnlDimmer(OwnMultiplexes[0], "msg", FOURTH_MLTPLX_PIN, "INST_PNL_DIMMER", false, 0, 1023);
 `
 
 `
-OwnPotentiometer floodDimmer(OwnMultiplexes[0], "msg", FIFTH_MLTPLX_PIN,
-                             "FLOOD_DIMMER", false, 0, 1023);
+OwnPotentiometer floodDimmer(OwnMultiplexes[0], "msg", FIFTH_MLTPLX_PIN, "FLOOD_DIMMER", false, 0, 1023);
 `
 
 `
-OwnSwitch2Pos lightsTestSw(OwnPCFs[0], EIGHTH_PIN, "LIGHTS_TEST_SW", "msg",
-                           false, 50);
+OwnSwitch2Pos lightsTestSw(OwnPCFs[0], EIGHTH_PIN, "LIGHTS_TEST_SW", "msg", false, 50);
 `
 
 `
-OwnPotentiometer warnCautionDimmer(OwnMultiplexes[0], "msg", SIXTH_MLTPLX_PIN,
-                                   "WARN_CAUTION_DIMMER", false, 0, 1023);
+OwnPotentiometer warnCautionDimmer(OwnMultiplexes[0], "msg", SIXTH_MLTPLX_PIN, "WARN_CAUTION_DIMMER", false, 0, 1023);
 `
 
 `
-OwnPotentiometer chartDimmer(OwnMultiplexes[0], "msg", SEVENTH_MLTPLX_PIN,
-                             "CHART_DIMMER", false, 0, 1023);
+OwnPotentiometer chartDimmer(OwnMultiplexes[0], "msg", SEVENTH_MLTPLX_PIN, "CHART_DIMMER", false, 0, 1023);
 `
 
 `
-OwnSwitch3Pos cockkpitLightModeSw(OwnPCFs[1], FIRST_PIN,
-                                  "COCKKPIT_LIGHT_MODE_SW", "msg", 50);
+OwnSwitch3Pos cockkpitLightModeSw(OwnPCFs[1], FIRST_PIN, "COCKKPIT_LIGHT_MODE_SW", "msg", 50);
 `
 
 ### DEFOG Panel
 `
-OwnSwitch3Pos wshieldAntiIceSw(PCF_to_be_replaced, PIN_to_be_replaced, "WSHIELD_ANTI_ICE_SW", "msg",
-                               50);
+OwnSwitch3Pos wshieldAntiIceSw(PCF_to_be_replaced, PIN_to_be_replaced, "WSHIELD_ANTI_ICE_SW", "msg", 50);
 `
 
 `
-OwnPotentiometer defogHandle(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN,
-                             "DEFOG_HANDLE", false, 0, 1023);
+OwnPotentiometer defogHandle(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "DEFOG_HANDLE", false, 0, 1023);
 `
 
 ### SNSR Panel
@@ -133,23 +120,19 @@ OwnSwitchMultiPos insSw(OwnPCFs[1], FIFTH_PIN, "msg", "INS_SW", false);
 On this panel, only the fill cable slot lasts undifined as it surely won't be used.
 
 `
-OwnSwitchMultiPos ky58ModeSelect(OwnPCFs[1], SIXTH_PIN, "msg",
-                                 "KY58_MODE_SELECT", false);
+OwnSwitchMultiPos ky58ModeSelect(OwnPCFs[1], SIXTH_PIN, "msg", "KY58_MODE_SELECT", false);
 `
 
 `
-OwnSwitchMultiPos ky58FillSelect(OwnPCFs[1], SEVENTH_PIN, "msg",
-                                 "KY58_FILL_SELECT", false);
+OwnSwitchMultiPos ky58FillSelect(OwnPCFs[1], SEVENTH_PIN, "msg", "KY58_FILL_SELECT", false);
 `
 
 `
-OwnSwitchMultiPos ky58PowerSelect(OwnPCFs[1], EIGHTH_PIN, "KY58_POWER_SELECT",
-                                  "msg", 50);
+OwnSwitchMultiPos ky58PowerSelect(OwnPCFs[1], EIGHTH_PIN, "KY58_POWER_SELECT", "msg", 50);
 `
 
 `
-OwnPotentiometer ky58Volume(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN,
-                             "KY58_VOLUME", false, 0, 1023);
+OwnPotentiometer ky58Volume(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "KY58_VOLUME", false, 0, 1023);
 `
 
 
@@ -246,13 +229,11 @@ OwnSwitch2Pos intWngTankSw(PCF_to_be_replaced, PIN_to_be_replaced, "INT_WNG_TANK
 `
 
 `
-OwnPotentiometer formationDimmer(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN,
-                                 "FORMATION_DIMMER", false, 0, 1023);
+OwnPotentiometer formationDimmer(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "FORMATION_DIMMER", false, 0, 1023);
 `
 
 `
-OwnPotentiometer positionDimmer(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN,
-                                "POSITION_DIMMER", false, 0, 1023);
+OwnPotentiometer positionDimmer(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "POSITION_DIMMER", false, 0, 1023);
 `
 
 ### FUEL Panel
@@ -287,8 +268,7 @@ OwnSwitch3Pos iffAntSelectSw(PCF_to_be_replaced, PIN_to_be_replaced, "IFF_ANT_SE
 `
 
 `
-OwnSwitch3Pos comm1AntSelectSw(PCF_to_be_replaced, PIN_to_be_replaced, "COMM1_ANT_SELECT_SW", "msg",
-                               50);
+OwnSwitch3Pos comm1AntSelectSw(PCF_to_be_replaced, PIN_to_be_replaced, "COMM1_ANT_SELECT_SW", "msg", 50);
 `
 
 ### COMMUNICATION Panel
@@ -301,8 +281,7 @@ OwnSwitch3Pos comCommGXmtSw(PCF_to_be_replaced, PIN_to_be_replaced, "COM_COMM_G_
 `
 
 `
-OwnSwitch2Pos comIlsUfcManSw(PCF_to_be_replaced, PIN_to_be_replaced, "COM_ILS_UFC_MAN_SW", "msg", false,
-                             50);
+OwnSwitch2Pos comIlsUfcManSw(PCF_to_be_replaced, PIN_to_be_replaced, "COM_ILS_UFC_MAN_SW", "msg", false, 50);
 `
 
 `
@@ -314,48 +293,39 @@ OwnSwitch3Pos comIffMode4Sw(PCF_to_be_replaced, PIN_to_be_replaced, "COM_IFF_MOD
 `
 
 `
-OwnSwitch2Pos comIffMasterSw(PCF_to_be_replaced, PIN_to_be_replaced, "COM_IFF_MASTER_SW", "msg", false,
-                             50);
+OwnSwitch2Pos comIffMasterSw(PCF_to_be_replaced, PIN_to_be_replaced, "COM_IFF_MASTER_SW", "msg", false, 50);
 `
 
 `
-OwnPotentiometer comAux(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_AUX", false,
-                        0, 1023);
+OwnPotentiometer comAux(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_AUX", false, 0, 1023);
 `
 
 `
-OwnPotentiometer comIcs(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_ICS", false,
-                        0, 1023);
+OwnPotentiometer comIcs(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_ICS", false, 0, 1023);
 `
 
 `
-OwnPotentiometer comMidsA(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_MIDS_A",
-                          false, 0, 1023);ça sera pas long hein c'est juste un petit appel
+OwnPotentiometer comMidsA(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_MIDS_A", false, 0, 1023);
 `
 
 `
-OwnPotentiometer comMidsB(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_MIDS_B",
-                          false, 0, 1023);
+OwnPotentiometer comMidsB(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_MIDS_B", false, 0, 1023);
 `
 
 `
-OwnPotentiometer comRwr(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_RWR", false,
-                        0, 1023);
+OwnPotentiometer comRwr(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_RWR", false, 0, 1023);
 `
 
 `
-OwnPotentiometer comTacan(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_TACAN",
-                          false, 0, 1023);
+OwnPotentiometer comTacan(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_TACAN", false, 0, 1023);
 `
 
 `
-OwnPotentiometer comVox(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_VOX", false,
-                        0, 1023);
+OwnPotentiometer comVox(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_VOX", false, 0, 1023);
 `
 
 `
-OwnPotentiometer comWpn(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_WPN", false,
-                        0, 1023);
+OwnPotentiometer comWpn(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "COM_WPN", false, 0, 1023);
 `
 
 `
@@ -370,8 +340,7 @@ OwnSwitch2Pos obogsSw(PCF_to_be_replaced, PIN_to_be_replaced, "OBOGS_SW", "msg",
 `
 
 `
-OwnPotentiometer oxyFlow(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "OXY_FLOW", false,
-                         0, 1023);
+OwnPotentiometer oxyFlow(MULTIPLEXER_to_be_replaced, "msg", FIRST_PIN, "OXY_FLOW", false, 0, 1023);
 `
 
 ### Mission Computer and Hydraulic Isolate Panel
@@ -380,8 +349,7 @@ OwnSwitch3Pos mcSw(PCF_to_be_replaced, PIN_to_be_replaced, "MC_SW", "msg", 50);
 `
 
 `
-OwnSwitch2Pos hydIsolateOverrideSw(PCF_to_be_replaced, PIN_to_be_replaced, "HYD_ISOLATE_OVERRIDE_SW",
-                                   "msg", false, 50);
+OwnSwitch2Pos hydIsolateOverrideSw(PCF_to_be_replaced, PIN_to_be_replaced, "HYD_ISOLATE_OVERRIDE_SW", "msg", false, 50);
 `
 
 ## Front panel
