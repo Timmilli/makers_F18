@@ -1,7 +1,6 @@
 -Isrc/
 -Ilib/
--Ilib/Adafruit_BusIO/
--Ilib/Adafruit_PCF8574/
+-Ilib/PCF8574_library/
 -Ilib/Constants/
 -Ilib/DCS-BIOS/src/
 -Ilib/DCS-BIOS/src/internal/

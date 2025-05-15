@@ -10,13 +10,6 @@ It is organized as it follows:
 FA18C\_hornet
 |--lib
    |
-   |--Adafruit\_BusIO
-      |- ...
-   |
-   |--Adafruit\_PCF8574
-      |- Adafruit\_PCF8574.h
-      |- ...
-   |
    |--Constants
       |- Constants.h
    |
@@ -42,6 +35,12 @@ FA18C\_hornet
    |--OwnSwitch
       |- OwnSwitch.c
       |- OwnSwitch.h
+   |
+   |--PCF8574\_library
+      |- PCF8574.h
+      |- PCF8574.cpp
+      |- PCF8574_library.h
+      |- ...
    |
    |- README
 |

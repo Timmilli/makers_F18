@@ -6,13 +6,15 @@
 #include "OwnPCF.hpp"
 #include "OwnPotentiometer.hpp"
 #include "OwnSwitch.hpp"
+#include "PCF8574.h"
 #include <Arduino.h>
 
 /* PCF setup*/
 
-Adafruit_PCF8574 pcf;
+PCF8574 firstPCF(ADDR_FIRST_PCF);
+PCF8574 secondPCF(ADDR_SECOND_PCF);
+PCF8574 thirdPCF(ADDR_THIRD_PCF);
 
-int addresses[PCF_AMOUNT] = {ADDR_FIRST_PCF, ADDR_SECOND_PCF, ADDR_THIRD_PCF};
 OwnPCF *OwnPCFs[PCF_AMOUNT];
 
 /* Multiplex setup */
@@ -84,9 +86,11 @@ void setup() {
   Serial.begin(115200);
 
   /* PCF setup */
+  OwnPCFs[0] = new OwnPCF(&firstPCF);
+  OwnPCFs[1] = new OwnPCF(&secondPCF);
+  OwnPCFs[2] = new OwnPCF(&thirdPCF);
   for (int i = 0; i < PCF_AMOUNT; i++) {
-    OwnPCFs[i] = new OwnPCF(&pcf);
-    OwnPCFs[i]->startPCF(addresses[i]);
+    OwnPCFs[i]->startPCF();
   }
 
   /* Switches setup */

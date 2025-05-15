@@ -34,9 +34,18 @@
 // PCFs
 #define PCF_AMOUNT 3
 
-#define ADDR_FIRST_PCF 0x20
-#define ADDR_SECOND_PCF 0x21
-#define ADDR_THIRD_PCF 0x22
+// Addresses are defined this way :
+// 011     1(A2)(A1)(A0)
+
+// 011    1000
+// +-> 3  +-> 8
+#define ADDR_FIRST_PCF 0x38
+// 011    1001
+// +-> 3  +-> 9
+#define ADDR_SECOND_PCF 0x39
+// 011    1010
+// +-> 3  +-> 10
+#define ADDR_THIRD_PCF 0x3A
 
 #define FIRST_PIN 1
 #define SECOND_PIN 2

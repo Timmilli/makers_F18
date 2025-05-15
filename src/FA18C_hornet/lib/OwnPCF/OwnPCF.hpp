@@ -1,15 +1,15 @@
 #ifndef __OWNADAFRUIT_HPP__
 #define __OWNADAFRUIT_HPP__
 
-#include "Adafruit_PCF8574.h"
+#include "PCF8574.h"
 
 class OwnPCF {
 private:
-  Adafruit_PCF8574 *_pcf;
+  PCF8574 *_pcf;
 
 public:
-  OwnPCF(Adafruit_PCF8574 *pcf);
-  void startPCF(int addr);
+  OwnPCF(PCF8574 *pcf);
+  void startPCF();
   void activatePin(unsigned int index);
   void deactivatePin(unsigned int index);
 };
