@@ -2,9 +2,7 @@
 #include "Arduino.h"
 #include "PCF8574.h"
 
-OwnPCF::OwnPCF(PCF8574 *pcf, const char *name) : _pcf(pcf) {
-  strncpy(_name, name, MAX_NAME_LENGTH);
-}
+OwnPCF::OwnPCF(PCF8574 *pcf, const char *name) : _pcf(pcf) {}
 
 char *OwnPCF::getName() { return _name; }
 

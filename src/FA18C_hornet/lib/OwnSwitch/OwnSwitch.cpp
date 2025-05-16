@@ -1,7 +1,7 @@
 #include "OwnSwitch.hpp"
 #include "OwnPCF.hpp"
 
-char switchCase(char stateA, char stateB) {
+int switchCase(char stateA, char stateB) {
   if (stateA == 1)
     return 1;
   if (stateB == 1)
@@ -9,7 +9,7 @@ char switchCase(char stateA, char stateB) {
   return 0;
 }
 
-char findHighPin() {
+int findHighPin() {
   if (digitalRead(FST_COMPLEX_READ_PIN) == HIGH)
     return 0;
   else if (digitalRead(SCND_COMPLEX_READ_PIN) == HIGH)
@@ -32,55 +32,66 @@ char findHighPin() {
 OwnSwitch2Pos::OwnSwitch2Pos(OwnPCF *pcf, unsigned int pin, const char *name,
                              const char *msg, bool reverse,
                              unsigned long debounceDelay)
-    : _oPCF(pcf), _pin(pin), _lastState(0) {
-  strncpy(_name, name, MAX_NAME_LENGTH);
-  _oPCF->activatePin(_pin);
-  char lastState = digitalRead(FST_SIMPLE_READ_PIN);
-  _oPCF->deactivatePin(_pin);
-  setAttributes(msg, lastState, reverse, debounceDelay);
-}
+    : _oPCF(pcf), _pin(pin), _lastState(0) {}
 
-char OwnSwitch2Pos::readState() { return _lastState; }
+int OwnSwitch2Pos::readState() { return _lastState; }
 void OwnSwitch2Pos::update() {
   _oPCF->activatePin(_pin);
-  _lastState = digitalRead(FST_SIMPLE_READ_PIN);
+  int newState = digitalRead(FST_SIMPLE_READ_PIN);
+  delay(10);
   _oPCF->deactivatePin(_pin);
+  if (newState != _lastState) {
+    Serial.print("from: ");
+    Serial.print(_lastState);
+    Serial.print("; to: ");
+    Serial.println(newState);
+    _lastState = newState;
+  }
 }
 char *OwnSwitch2Pos::getName() { return _name; }
 
 OwnSwitch3Pos::OwnSwitch3Pos(OwnPCF *pcf, unsigned int pin, const char *name,
                              const char *msg, unsigned long debounceDelay)
     : _oPCF(pcf), _pin(pin), _lastState(0) {
-  strncpy(_name, name, MAX_NAME_LENGTH);
   _oPCF->activatePin(_pin);
-  char lastState = switchCase(digitalRead(FST_SIMPLE_READ_PIN),
-                              digitalRead(SCND_SIMPLE_READ_PIN));
   _oPCF->deactivatePin(_pin);
-
-  setAttributes(msg, lastState, debounceDelay);
 }
 
-char OwnSwitch3Pos::readState() { return _lastState; }
+int OwnSwitch3Pos::readState() { return _lastState; }
 void OwnSwitch3Pos::update() {
   _oPCF->activatePin(_pin);
-  _lastState = switchCase(digitalRead(FST_SIMPLE_READ_PIN),
-                          digitalRead(SCND_SIMPLE_READ_PIN));
+  int newState = switchCase(digitalRead(FST_SIMPLE_READ_PIN),
+                            digitalRead(SCND_SIMPLE_READ_PIN));
+  delay(10);
   _oPCF->deactivatePin(_pin);
+  if (newState != _lastState) {
+    Serial.print("from: ");
+    Serial.print(_lastState);
+    Serial.print("; to: ");
+    Serial.println(newState);
+    _lastState = newState;
+  }
 }
 char *OwnSwitch3Pos::getName() { return _name; }
 
 OwnSwitchMultiPos::OwnSwitchMultiPos(OwnPCF *oPCF, unsigned int pin,
                                      const char *msg, const char *name,
                                      bool reverse)
-    : _oPCF(oPCF), _pin(pin), _lastState(0) {
-  setAttributes(msg, reverse);
-}
+    : _oPCF(oPCF), _pin(pin), _lastState(0) {}
 
-char OwnSwitchMultiPos::readState() { return _lastState; }
+int OwnSwitchMultiPos::readState() { return _lastState; }
 
 void OwnSwitchMultiPos::update() {
   _oPCF->activatePin(_pin);
-  _lastState = findHighPin();
+  int newState = findHighPin();
+  delay(10);
   _oPCF->deactivatePin(_pin);
+  if (newState != _lastState) {
+    Serial.print("from: ");
+    Serial.print(_lastState);
+    Serial.print("; to: ");
+    Serial.println(newState);
+    _lastState = newState;
+  }
 }
 char *OwnSwitchMultiPos::getName() { return _name; }

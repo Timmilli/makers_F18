@@ -10,7 +10,7 @@ class Switch2PosT : PollingInput, public ResettableInput {
 private:
   const char *msg_;
   char debounceSteadyState_;
-  char lastState_;
+  int lastState_;
   bool reverse_;
   unsigned long debounceDelay_;
   unsigned long lastDebounceTime = 0;
@@ -18,7 +18,7 @@ private:
   void resetState() { lastState_ = (lastState_ == 0) ? -1 : 0; }
 
   void pollInput() {
-    char state = readState();
+    int state = readState();
     if (reverse_)
       state = !state;
 
@@ -52,7 +52,7 @@ public:
       lastState_ = !lastState_;
   }
 
-  void setAttributes(const char *msg, char lastState, bool reverse,
+  void setAttributes(const char *msg, int lastState, bool reverse,
                      unsigned long debounceDelay) {
     msg_ = msg;
     debounceDelay_ = debounceDelay;
@@ -65,7 +65,7 @@ public:
 
   void SetControl(const char *msg) { msg_ = msg; }
 
-  virtual char readState();
+  virtual int readState();
 
   void resetThisState() { this->resetState(); }
 };
@@ -78,7 +78,7 @@ private:
   const char *switchMsg_;
   const char *coverMsg_;
   char pin_;
-  char lastState_;
+  int lastState_;
   char switchState_;
   bool reverse_;
   unsigned long debounceDelay_;
@@ -188,14 +188,14 @@ template <unsigned long pollIntervalMs = POLL_EVERY_TIME>
 class Switch3PosT : PollingInput, public ResettableInput {
 private:
   const char *msg_;
-  char lastState_;
+  int lastState_;
   char debounceSteadyState_;
   unsigned long debounceDelay_;
   unsigned long lastDebounceTime = 0;
 
   void resetState() { lastState_ = (lastState_ == 0) ? -1 : 0; }
   void pollInput() {
-    char state = readState();
+    int state = readState();
     unsigned long now = millis();
     if (state != debounceSteadyState_) {
       lastDebounceTime = now;
@@ -228,9 +228,9 @@ public:
     debounceDelay_ = debounceDelay;
   }
 
-  virtual char readState();
+  virtual int readState();
 
-  void setAttributes(const char *msg, char lastState,
+  void setAttributes(const char *msg, int lastState,
                      unsigned long debounceDelay = 50) {
     msg_ = msg;
     lastState_ = lastState;
@@ -250,11 +250,11 @@ private:
   const char *msg_;
   const byte *pins_;
   char numberOfPins_;
-  char lastState_;
+  int lastState_;
   bool reverse_;
   void resetState() { lastState_ = (lastState_ == 0) ? -1 : 0; }
   void pollInput() {
-    char state = readState();
+    int state = readState();
     if (state != lastState_) {
       char buf[7];
       utoa(state, buf, 10);
@@ -280,7 +280,7 @@ public:
     lastState_ = readState();
   }
 
-  virtual char readState();
+  virtual int readState();
 
   void setAttributes(const char *msg, bool reverse) {
     msg_ = msg;

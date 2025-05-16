@@ -12,14 +12,15 @@ private:
   OwnPCF *_oPCF;
   unsigned int _pin;
   char _name[MAX_NAME_LENGTH];
-  char _lastState;
+  int _lastState;
 
 public:
   OwnSwitch2Pos(OwnPCF *pcf, unsigned int pin, const char *name,
                 const char *msg, bool reverse, unsigned long debounceDelay);
-  char readState();
+  int readState();
   char *getName();
   void update();
+  void setPCF(OwnPCF *oPCF) { _oPCF = oPCF; }
 };
 
 class OwnSwitch3Pos : public DcsBios::Switch3Pos {
@@ -27,14 +28,15 @@ private:
   OwnPCF *_oPCF;
   unsigned int _pin;
   char _name[MAX_NAME_LENGTH];
-  char _lastState;
+  int _lastState;
 
 public:
   OwnSwitch3Pos(OwnPCF *pcf, unsigned int pin, const char *name,
                 const char *msg, unsigned long debounceDelay);
-  char readState();
+  int readState();
   char *getName();
   void update();
+  void setPCF(OwnPCF *oPCF) { _oPCF = oPCF; }
 };
 
 class OwnSwitchMultiPos : public DcsBios::SwitchMultiPos {
@@ -42,14 +44,15 @@ private:
   OwnPCF *_oPCF;
   unsigned int _pin;
   char _name[MAX_NAME_LENGTH];
-  char _lastState;
+  int _lastState;
 
 public:
   OwnSwitchMultiPos(OwnPCF *oPCF, unsigned int pin, const char *msg,
                     const char *name, bool reverse);
-  char readState();
+  int readState();
   char *getName();
   void update();
+  void setPCF(OwnPCF *oPCF) { _oPCF = oPCF; }
 };
 
 #endif // include guard

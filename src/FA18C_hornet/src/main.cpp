@@ -1,10 +1,5 @@
-#define DCSBIOS_DEFAULT_SERIAL
-#include "DcsBios.h"
-
 #include "Constants.h"
-#include "OwnMultiplex.hpp"
 #include "OwnPCF.hpp"
-#include "OwnPotentiometer.hpp"
 #include "OwnSwitch.hpp"
 #include "PCF8574.h"
 #include <Arduino.h>
@@ -12,177 +7,147 @@
 /* PCF setup*/
 
 PCF8574 firstPCF(ADDR_FIRST_PCF);
+OwnPCF firstoPCF(&firstPCF, "first PCF");
 PCF8574 secondPCF(ADDR_SECOND_PCF);
+OwnPCF secondoPCF(&secondPCF, "second PCF");
 PCF8574 thirdPCF(ADDR_THIRD_PCF);
-
-OwnPCF *OwnPCFs[PCF_AMOUNT];
-
-/* Multiplex setup */
-
-OwnMultiplex *OwnMultiplexes[MULTIPLEX_AMOUNT];
+OwnPCF thirdoPCF(&thirdPCF, "third PCF");
 
 /* Switch and potentiometer arrays */
-
-void *switches[NB_2SWITCHES + NB_3SWITCHES + NB_NSWITCHES];
-OwnPotentiometer *potentiometers[NB_POTENTIOMETER];
 
 /* Switch and potentiometer definitions */
 
 // ELEC
-OwnSwitch2Pos lGenSw(OwnPCFs[0], FIFTH_PIN, "L_GEN_SW", "msg", false, 50);
-OwnSwitch3Pos batterySw(OwnPCFs[0], FIRST_PIN, "BATTERY_SW", "msg", 50);
-OwnSwitch2Pos rGenSw(OwnPCFs[0], SIXTH_PIN, "R_GEN_SW", "msg", false, 50);
+OwnSwitch2Pos lGenSw(&firstoPCF, P4, "L_GEN_SW", "msg", false, 50);
+OwnSwitch3Pos batterySw(&firstoPCF, P0, "BATTERY_SW", "msg", 50);
+OwnSwitch2Pos rGenSw(&firstoPCF, P5, "R_GEN_SW", "msg", false, 50);
 
 // ECS
-OwnSwitch3Pos ecsModeSw(OwnPCFs[0], SECOND_PIN, "ECS_MODE_SW", "msg", 50);
-OwnPotentiometer cabinTemp(OwnMultiplexes[0], "msg", FIRST_MLTPLX_PIN,
-                           "CABIN_TEMP", false, 0, 1023);
-OwnPotentiometer suitTemp(OwnMultiplexes[0], "msg", SECOND_MLTPLX_PIN,
-                          "SUIT_TEMP", false, 0, 1023);
-OwnSwitch3Pos cabinPressSw(OwnPCFs[0], THIRD_PIN, "CABIN_PRESS_SW", "msg", 50);
-OwnSwitch2Pos pitotHeatSw(OwnPCFs[0], SEVENTH_PIN, "PITOT_HEAT_SW", "msg",
-                          false, 50);
-OwnSwitch3Pos engAntiiceSw(OwnPCFs[0], FOURTH_PIN, "ENG_ANTIICE_SW", "msg", 50);
-OwnSwitchMultiPos bleedAirKnob(OwnPCFs[1], THIRD_PIN, "msg", "BLEED_AIR_KNOB",
-                               false);
+OwnSwitch3Pos ecsModeSw(&firstoPCF, P1, "ECS_MODE_SW", "msg", 50);
+// OwnPotentiometer cabinTemp(OwnMultiplexes[0], "msg", FIRST_MLTPLX_PIN,
+//                            "CABIN_TEMP", false, 0, 1023);
+// OwnPotentiometer suitTemp(OwnMultiplexes[0], "msg", SECOND_MLTPLX_PIN,
+//                           "SUIT_TEMP", false, 0, 1023);
+OwnSwitch3Pos cabinPressSw(&firstoPCF, P2, "CABIN_PRESS_SW", "msg", 50);
+OwnSwitch2Pos pitotHeatSw(&firstoPCF, P6, "PITOT_HEAT_SW", "msg", false, 50);
+OwnSwitch3Pos engAntiiceSw(&firstoPCF, P3, "ENG_ANTIICE_SW", "msg", 50);
+OwnSwitchMultiPos bleedAirKnob(&secondoPCF, P2, "msg", "BLEED_AIR_KNOB", false);
 
 // INTR LT
-OwnPotentiometer consolesDimmer(OwnMultiplexes[0], "msg", THIRD_MLTPLX_PIN,
-                                "CONSOLES_DIMMER", false, 0, 1023);
-OwnPotentiometer instPnlDimmer(OwnMultiplexes[0], "msg", FOURTH_MLTPLX_PIN,
-                               "INST_PNL_DIMMER", false, 0, 1023);
-OwnPotentiometer floodDimmer(OwnMultiplexes[0], "msg", FIFTH_MLTPLX_PIN,
-                             "FLOOD_DIMMER", false, 0, 1023);
-OwnSwitch2Pos lightsTestSw(OwnPCFs[0], EIGHTH_PIN, "LIGHTS_TEST_SW", "msg",
-                           false, 50);
-OwnPotentiometer warnCautionDimmer(OwnMultiplexes[0], "msg", SIXTH_MLTPLX_PIN,
-                                   "WARN_CAUTION_DIMMER", false, 0, 1023);
-OwnPotentiometer chartDimmer(OwnMultiplexes[0], "msg", SEVENTH_MLTPLX_PIN,
-                             "CHART_DIMMER", false, 0, 1023);
-OwnSwitch3Pos cockkpitLightModeSw(OwnPCFs[1], FIRST_PIN,
-                                  "COCKKPIT_LIGHT_MODE_SW", "msg", 50);
+// OwnPotentiometer consolesDimmer(OwnMultiplexes[0], "msg", THIRD_MLTPLX_PIN,
+//                                 "CONSOLES_DIMMER", false, 0, 1023);
+// OwnPotentiometer instPnlDimmer(OwnMultiplexes[0], "msg", FOURTH_MLTPLX_PIN,
+//                                "INST_PNL_DIMMER", false, 0, 1023);
+// OwnPotentiometer floodDimmer(OwnMultiplexes[0], "msg", FIFTH_MLTPLX_PIN,
+//                              "FLOOD_DIMMER", false, 0, 1023);
+OwnSwitch2Pos lightsTestSw(&firstoPCF, P7, "LIGHTS_TEST_SW", "msg", false, 50);
+// OwnPotentiometer warnCautionDimmer(OwnMultiplexes[0], "msg",
+// SIXTH_MLTPLX_PIN,
+//                                    "WARN_CAUTION_DIMMER", false, 0, 1023);
+// OwnPotentiometer chartDimmer(OwnMultiplexes[0], "msg", SEVENTH_MLTPLX_PIN,
+//                              "CHART_DIMMER", false, 0, 1023);
+OwnSwitch3Pos cockkpitLightModeSw(&secondoPCF, P0, "COCKKPIT_LIGHT_MODE_SW",
+                                  "msg", 50);
 
 // SNSR
-OwnSwitch3Pos flirSw(OwnPCFs[2], FOURTH_PIN, "FLIR_SW", "msg", 50);
-OwnSwitch2Pos ltdRSw(OwnPCFs[1], SECOND_PIN, "LTD_R_SW", "msg", false, 50);
-OwnSwitch2Pos lstNflrSw(OwnPCFs[2], FIFTH_PIN, "LST_NFLR_SW", "msg", false, 50);
-OwnSwitchMultiPos radarSw(OwnPCFs[1], FOURTH_PIN, "msg", "RADAR_SW", false);
-OwnSwitchMultiPos insSw(OwnPCFs[1], FIFTH_PIN, "msg", "INS_SW", false);
+OwnSwitch3Pos flirSw(&thirdoPCF, P3, "FLIR_SW", "msg", 50);
+OwnSwitch2Pos ltdRSw(&secondoPCF, P1, "LTD_R_SW", "msg", false, 50);
+OwnSwitch2Pos lstNflrSw(&thirdoPCF, P4, "LST_NFLR_SW", "msg", false, 50);
+OwnSwitchMultiPos radarSw(&secondoPCF, P3, "msg", "RADAR_SW", false);
+OwnSwitchMultiPos insSw(&secondoPCF, P4, "msg", "INS_SW", false);
 
 // KY 58
-OwnSwitchMultiPos ky58ModeSelect(OwnPCFs[1], SIXTH_PIN, "msg",
-                                 "KY58_MODE_SELECT", false);
-OwnSwitchMultiPos ky58FillSelect(OwnPCFs[1], SEVENTH_PIN, "msg",
-                                 "KY58_FILL_SELECT", false);
-OwnSwitchMultiPos ky58PowerSelect(OwnPCFs[1], EIGHTH_PIN, "KY58_POWER_SELECT",
-                                  "msg", 50);
+OwnSwitchMultiPos ky58ModeSelect(&secondoPCF, P5, "msg", "KY58_MODE_SELECT",
+                                 false);
+OwnSwitchMultiPos ky58FillSelect(&secondoPCF, P6, "msg", "KY58_FILL_SELECT",
+                                 false);
+OwnSwitchMultiPos ky58PowerSelect(&secondoPCF, P7, "KY58_POWER_SELECT", "msg",
+                                  50);
 
 /* Main code */
 
 void setup() {
-  while (!Serial) {
-    delay(10);
-  }
   Serial.begin(115200);
 
-  /* PCF setup */
-  OwnPCFs[0] = new OwnPCF(&firstPCF, "first PCF");
-  OwnPCFs[1] = new OwnPCF(&secondPCF, "second PCF");
-  OwnPCFs[2] = new OwnPCF(&thirdPCF, "third PCF");
-  for (int i = 0; i < PCF_AMOUNT; i++) {
-    OwnPCFs[i]->startPCF();
-  }
+  pinMode(FST_SIMPLE_READ_PIN, INPUT);
+  pinMode(SCND_SIMPLE_READ_PIN, INPUT);
 
   /* Switches setup */
-  int i = 0;
-  // 2 pos
-  switches[i++] = (void *)&lGenSw;
-  switches[i++] = (void *)&rGenSw;
-  switches[i++] = (void *)&pitotHeatSw;
-  switches[i++] = (void *)&lightsTestSw;
-  switches[i++] = (void *)&ltdRSw;
-  switches[i++] = (void *)&lstNflrSw;
-  // 3 pos
-  switches[i++] = (void *)&batterySw;
-  switches[i++] = (void *)&ecsModeSw;
-  switches[i++] = (void *)&cabinPressSw;
-  switches[i++] = (void *)&engAntiiceSw;
-  switches[i++] = (void *)&cockkpitLightModeSw;
-  switches[i++] = (void *)&flirSw;
-  // multi pos(void *)
-  switches[i++] = (void *)&bleedAirKnob;
-  switches[i++] = (void *)&insSw;
-  switches[i++] = (void *)&radarSw;
-  switches[i++] = (void *)&ky58FillSelect;
-  switches[i++] = (void *)&ky58ModeSelect;
-  switches[i++] = (void *)&ky58PowerSelect;
 
-  /* Potentiometer setup */
-  i = 0;
-  potentiometers[i++] = &cabinTemp;
-  potentiometers[i++] = &suitTemp;
-  potentiometers[i++] = &chartDimmer;
-  potentiometers[i++] = &consolesDimmer;
-  potentiometers[i++] = &floodDimmer;
-  potentiometers[i++] = &instPnlDimmer;
-  potentiometers[i++] = &warnCautionDimmer;
+  /* PCF setup */
 
-  OwnMultiplexes[0] = new OwnMultiplex(
-      OwnPCFs[2], FIRST_POTENTIOMETER_PIN, SECOND_POTENTIOMETER_PIN,
-      THIRD_POTENTIOMETER_PIN, FST_ADDR_ENABLE, ANALOG_READ_ADDR);
-
-  /*DcsBios setup function*/
-  // Unused as it only repeats 'Serial.begin'
-  // DcsBios::setup();
+  firstoPCF.startPCF();
+  secondoPCF.startPCF();
+  thirdoPCF.startPCF();
 }
 
 /* Main loop */
 
 void loop() {
-  for (int i = 0; i < NB_2SWITCHES + NB_3SWITCHES + NB_NSWITCHES; i++) {
-    if (i < NB_2SWITCHES) {
-      ((OwnSwitch2Pos *)switches)[i].update();
-    } else if (i < NB_2SWITCHES + NB_3SWITCHES) {
-      ((OwnSwitch3Pos *)switches)[i].update();
-    } else {
-      ((OwnSwitchMultiPos *)switches)[i].update();
-    }
-  }
-  for (int i = 0; i < MULTIPLEX_AMOUNT; i++) {
-    OwnMultiplexes[i]->update();
-  }
-  delay(50);
-
-  DcsBios::loop();
+  Serial.println("Updating batterySw");
+  batterySw.update();
+  delay(500);
+  Serial.println("Updating ecsModeSw");
+  ecsModeSw.update();
+  delay(500);
+  Serial.println("Updating cabinPressSw");
+  cabinPressSw.update();
+  delay(500);
+  Serial.println("Updating engAntiiceSw");
+  engAntiiceSw.update();
+  delay(500);
+  Serial.println("Updating lGenSw");
+  lGenSw.update();
+  delay(500);
+  Serial.println("Updating rGenSw");
+  rGenSw.update();
+  delay(500);
+  Serial.println("Updating pitotHeatSw");
+  pitotHeatSw.update();
+  delay(500);
+  Serial.println("Updating lightsTestSw");
+  lightsTestSw.update();
+  delay(500);
 
   if (Serial.read() == '!') {
-    for (int i = 0; i < NB_2SWITCHES + NB_3SWITCHES + NB_NSWITCHES; i++) {
-      if (i < NB_2SWITCHES) {
-        Serial.print("Switch ");
-        Serial.print(((OwnSwitch2Pos *)switches)[i].getName());
-        Serial.print(": ");
-        Serial.print(((OwnSwitch2Pos *)switches)[i].readState());
-        Serial.println();
-      } else if (i < NB_2SWITCHES + NB_3SWITCHES) {
-        Serial.print("Switch ");
-        Serial.print(((OwnSwitch3Pos *)switches)[i].getName());
-        Serial.print(": ");
-        Serial.print(((OwnSwitch3Pos *)switches)[i].readState());
-        Serial.println();
-      } else {
-        Serial.print("Switch ");
-        Serial.print(((OwnSwitchMultiPos *)switches)[i].getName());
-        Serial.print(": ");
-        Serial.print(((OwnSwitchMultiPos *)switches)[i].readState());
-        Serial.println();
-      }
-    }
-    for (int i = 0; i < MULTIPLEX_AMOUNT; i++) {
-      Serial.print("Potentiometer ");
-      Serial.print(potentiometers[i]->getName());
-      Serial.print(": ");
-      Serial.print(potentiometers[i]->readState());
-      Serial.println();
-    }
+    Serial.print("State (");
+    Serial.print("batterySw");
+    Serial.print("): ");
+    Serial.println(batterySw.readState());
+
+    Serial.print("State (");
+    Serial.print("ecsModeSw");
+    Serial.print("): ");
+    Serial.println(ecsModeSw.readState());
+
+    Serial.print("State (");
+    Serial.print("cabinPressSw");
+    Serial.print("): ");
+    Serial.println(cabinPressSw.readState());
+
+    Serial.print("State (");
+    Serial.print("engAntiiceSw");
+    Serial.print("): ");
+    Serial.println(engAntiiceSw.readState());
+
+    Serial.print("State (");
+    Serial.print("lGenSw");
+    Serial.print("): ");
+    Serial.println(lGenSw.readState());
+
+    Serial.print("State (");
+    Serial.print("rGenSw");
+    Serial.print("): ");
+    Serial.println(rGenSw.readState());
+
+    Serial.print("State (");
+    Serial.print("pitotHeatSw");
+    Serial.print("): ");
+    Serial.println(pitotHeatSw.readState());
+
+    Serial.print("State (");
+    Serial.print("lightsTestSw");
+    Serial.print("): ");
+    Serial.println(lightsTestSw.readState());
   }
 }

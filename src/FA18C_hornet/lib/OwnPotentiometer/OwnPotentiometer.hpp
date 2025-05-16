@@ -1,13 +1,10 @@
 #ifndef __OWNPOTENTIOMETER_HPP__
 #define __OWNPOTENTIOMETER_HPP__
 
-#define DCSBIOS_DEFAULT_SERIAL
-#include "DcsBios.h"
-
 #include "Constants.h"
 #include "OwnMultiplex.hpp"
 
-class OwnPotentiometer : public DcsBios::Potentiometer {
+class OwnPotentiometer {
 private:
   OwnMultiplex *_oMul;
   unsigned int _pin;
