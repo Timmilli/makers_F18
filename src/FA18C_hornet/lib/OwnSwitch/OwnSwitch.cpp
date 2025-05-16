@@ -10,7 +10,7 @@ int switchCase(char stateA, char stateB) {
 }
 
 int findHighPin() {
-  if (digitalRead(FST_COMPLEX_READ_PIN) == HIGH)
+  if (digitalRead(FRST_COMPLEX_READ_PIN) == HIGH)
     return 0;
   else if (digitalRead(SCND_COMPLEX_READ_PIN) == HIGH)
     return 1;

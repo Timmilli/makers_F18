@@ -69,8 +69,26 @@ OwnSwitchMultiPos ky58PowerSelect(&secondoPCF, P7, "KY58_POWER_SELECT", "msg",
 void setup() {
   Serial.begin(115200);
 
+  // 2 and 3 position switches reading pin setup
   pinMode(FST_SIMPLE_READ_PIN, INPUT);
   pinMode(SCND_SIMPLE_READ_PIN, INPUT);
+
+  // Multi position switches reading pin setup
+  /*
+  pinMode(FRST_COMPLEX_READ_PIN, INPUT);
+  pinMode(SCND_COMPLEX_READ_PIN, INPUT);
+  pinMode(THRD_COMPLEX_READ_PIN, INPUT);
+  pinMode(FRTH_COMPLEX_READ_PIN, INPUT);
+  pinMode(FFTH_COMPLEX_READ_PIN, INPUT);
+  pinMode(SXTH_COMPLEX_READ_PIN, INPUT);
+  pinMode(SVTH_COMPLEX_READ_PIN, INPUT);
+  pinMode(EGTH_COMPLEX_READ_PIN, INPUT);
+  */
+
+  // Potentiometers reading pin setup
+  /*
+  pinMode(ANALOG_READ_ADDR, INPUT);
+  */
 
   /* Switches setup */
 
